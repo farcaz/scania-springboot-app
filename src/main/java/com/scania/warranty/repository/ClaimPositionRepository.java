@@ -20,29 +20,19 @@ import java.util.List;
 @Repository
 public interface ClaimPositionRepository extends JpaRepository<ClaimPosition, ClaimPositionId> {
     
-    @Query("SELECT cp FROM ClaimPosition cp WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr ORDER BY cp.fehlerNr, cp.folgeNr, cp.zeile, cp.aufteilung")
-    List<ClaimPosition> findByKuerzelAndClaimNrOrderByKeys(@Param("kuerzel") String kuerzel, 
-                                                             @Param("claimNr") String claimNr); // @rpg-trace: n1784
-    
-    @Query("SELECT SUM(cp.wert) FROM ClaimPosition cp WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr AND cp.fehlerNr = :fehlerNr AND cp.folgeNr = :folgeNr")
-    BigDecimal calculateTotalValueByClaimKey(@Param("kuerzel") String kuerzel, 
-                                              @Param("claimNr") String claimNr, 
-                                              @Param("fehlerNr") String fehlerNr, 
-                                              @Param("folgeNr") String folgeNr);
+    @Query("SELECT cp FROM ClaimPosition cp WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr ORDER BY cp.fehlerNr, cp.folgeNr, cp.zeile")
+    List<ClaimPosition> findByKuerzelAndClaimNr(@Param("kuerzel") String kuerzel, @Param("claimNr") String claimNr); // @rpg-trace: n1784
     
     @Query("SELECT cp FROM ClaimPosition cp WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr AND cp.fehlerNr = :fehlerNr")
-    List<ClaimPosition> findByCompanyCodeAndClaimNumberAndErrorNumber(@Param("kuerzel") String kuerzel, 
-                                                                        @Param("claimNr") String claimNr, 
-                                                                        @Param("fehlerNr") String fehlerNr);
+    List<ClaimPosition> findByCompanyCodeAndClaimNumberAndErrorNumber(@Param("kuerzel") String kuerzel, @Param("claimNr") String claimNr, @Param("fehlerNr") String fehlerNr);
     
-    @Query("SELECT CONCAT(LPAD(CAST(cp.zeile AS string), 3, '0'), LPAD(CAST(cp.posNr AS string), 3, '0')) FROM ClaimPosition cp WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr ORDER BY cp.posNr")
-    String findAggregatedPositionData(@Param("kuerzel") String kuerzel, 
-                                       @Param("claimNr") String claimNr);
+    @Query("SELECT COALESCE(SUM(cp.wert), 0) FROM ClaimPosition cp WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr AND cp.fehlerNr = :fehlerNr AND cp.folgeNr = :folgeNr")
+    BigDecimal calculateTotalValueByClaimKey(@Param("kuerzel") String kuerzel, @Param("claimNr") String claimNr, @Param("fehlerNr") String fehlerNr, @Param("folgeNr") String folgeNr);
+    
+    @Query("SELECT CONCAT(LPAD(CAST(cp.zeile AS string), 3, '0'), LPAD(CAST(cp.aufteilung AS string), 3, '0')) FROM ClaimPosition cp WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr ORDER BY cp.zeile, cp.aufteilung")
+    String findAggregatedPositionData(@Param("kuerzel") String kuerzel, @Param("claimNr") String claimNr);
     
     @Modifying
-    @Query("UPDATE ClaimPosition cp SET cp.posNr = :newPosition WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr AND cp.zeile = :lineNo")
-    void updatePosition(@Param("kuerzel") String kuerzel, 
-                        @Param("claimNr") String claimNr, 
-                        @Param("lineNo") Integer lineNo, 
-                        @Param("newPosition") int newPosition);
+    @Query("UPDATE ClaimPosition cp SET cp.aufteilung = :newPosition WHERE cp.kuerzel = :kuerzel AND cp.claimNr = :claimNr AND cp.zeile = :lineNo")
+    int updatePosition(@Param("kuerzel") String kuerzel, @Param("claimNr") String claimNr, @Param("lineNo") Integer lineNo, @Param("newPosition") int newPosition);
 }

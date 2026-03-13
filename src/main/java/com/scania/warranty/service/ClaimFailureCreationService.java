@@ -42,8 +42,8 @@ public class ClaimFailureCreationService { // @rpg-trace: n1790
         
         claimFailure.setFehlerTeil(partNumber != null ? partNumber : ""); // @rpg-trace: n1790
         claimFailure.setBeantrMat(valueMaterial); // @rpg-trace: n1790
-        claimFailure.setBeantrArb(valueLabor); // @rpg-trace: n1790
-        claimFailure.setBeantrSpez(valueSpecial); // @rpg-trace: n1790
+        claimFailure.setBeantrgArb(valueLabor); // @rpg-trace: n1790
+        claimFailure.setBeantrgSpez(valueSpecial); // @rpg-trace: n1790
         
         if (textLines != null && !textLines.isEmpty()) { // @rpg-trace: n1790
             if (textLines.size() > 0) claimFailure.setText1(textLines.get(0)); // @rpg-trace: n1790

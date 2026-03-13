@@ -170,6 +170,14 @@ public class ClaimPosition {
         this.satzart = satzart;
     }
     
+    public String getRecordType() {
+        return satzart;
+    }
+    
+    public void setRecordType(String satzart) {
+        this.satzart = satzart;
+    }
+    
     public String getNr() {
         return nr;
     }
@@ -266,6 +274,14 @@ public class ClaimPosition {
         this.resultcode = resultcode;
     }
     
+    public String getResultCode() {
+        return resultcode;
+    }
+    
+    public void setResultCode(String resultcode) {
+        this.resultcode = resultcode;
+    }
+    
     public String getCodeType() {
         return codeType;
     }
@@ -352,13 +368,5 @@ public class ClaimPosition {
     
     public void setText(String text) {
         this.text = text;
-    }
-    
-    public String getRecordType() {
-        return satzart;
-    }
-    
-    public String getResultCode() {
-        return resultcode;
     }
 }

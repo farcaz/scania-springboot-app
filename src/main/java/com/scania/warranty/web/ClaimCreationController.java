@@ -22,7 +22,7 @@ public class ClaimCreationController {
     }
     
     @PostMapping("/create-from-positions")
-    public ResponseEntity<Void> createClaim(@RequestBody ClaimCreationRequest request) { // @rpg-trace: n1779
+    public ResponseEntity<Void> createClaim(@RequestBody ClaimCreationRequest request) {
         claimCreationService.createClaim(
             request.kuerzel(),
             request.claimNr(),
@@ -32,7 +32,6 @@ public class ClaimCreationController {
             request.auftragsNr(),
             request.bereich()
         ); // @rpg-trace: n1779
-        
-        return ResponseEntity.ok().build(); // @rpg-trace: n1836
+        return ResponseEntity.ok().build();
     }
 }

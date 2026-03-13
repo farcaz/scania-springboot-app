@@ -9,14 +9,25 @@ package com.scania.warranty.dto;
 import java.math.BigDecimal;
 
 public record ClaimDto(
-    String pakz, // @rpg-trace: schema
-    String rechNr, // @rpg-trace: schema
-    String rechDatum, // @rpg-trace: schema
-    String auftragsNr, // @rpg-trace: schema
-    String bereich, // @rpg-trace: schema
-    String claimNr, // @rpg-trace: schema
-    String chassisNr, // @rpg-trace: schema
-    Integer statusCodeSde, // @rpg-trace: schema
-    Integer anzFehler // @rpg-trace: schema
-) {
-}
+    String pakz,
+    String rechNr,
+    String rechDatum,
+    String auftragsNr,
+    String bereich,
+    String wete,
+    String claimNr,
+    String chassisNr,
+    String kennzeichen,
+    Integer zulDatum,
+    Integer repDatum,
+    Integer kmStand,
+    Integer produktTyp,
+    String anhang,
+    String auslaender,
+    String kdNr,
+    String kdName,
+    String claimNrSde,
+    Integer statusCodeSde,
+    Integer anzFehler,
+    String aufNr
+) {}

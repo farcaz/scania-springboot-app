@@ -91,10 +91,10 @@ public class ClaimFailure {
     private BigDecimal beantrMat; // @rpg-trace: schema
     
     @Column(name = "BEANTRG. ARB.", precision = 11, scale = 2, nullable = false)
-    private BigDecimal beantrArb; // @rpg-trace: schema
+    private BigDecimal beantrgArb; // @rpg-trace: schema
     
     @Column(name = "BEANTRG. SPEZ.", precision = 11, scale = 2, nullable = false)
-    private BigDecimal beantrSpez; // @rpg-trace: schema
+    private BigDecimal beantrgSpez; // @rpg-trace: schema
     
     @Column(name = "CLAIM-ART", precision = 1, scale = 0, nullable = false)
     private Integer claimArt; // @rpg-trace: schema
@@ -368,20 +368,20 @@ public class ClaimFailure {
         this.beantrMat = beantrMat;
     }
     
-    public BigDecimal getBeantrArb() {
-        return beantrArb;
+    public BigDecimal getBeantrgArb() {
+        return beantrgArb;
     }
     
-    public void setBeantrArb(BigDecimal beantrArb) {
-        this.beantrArb = beantrArb;
+    public void setBeantrgArb(BigDecimal beantrgArb) {
+        this.beantrgArb = beantrgArb;
     }
     
-    public BigDecimal getBeantrSpez() {
-        return beantrSpez;
+    public BigDecimal getBeantrgSpez() {
+        return beantrgSpez;
     }
     
-    public void setBeantrSpez(BigDecimal beantrSpez) {
-        this.beantrSpez = beantrSpez;
+    public void setBeantrgSpez(BigDecimal beantrgSpez) {
+        this.beantrgSpez = beantrgSpez;
     }
     
     public Integer getClaimArt() {

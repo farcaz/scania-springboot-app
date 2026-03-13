@@ -20,15 +20,13 @@ import java.util.Optional;
 public interface ClaimRepository extends JpaRepository<Claim, ClaimId> {
     
     @Query("SELECT c FROM Claim c WHERE c.pakz = :pakz AND c.rechNr = :rechNr AND c.rechDatum = :rechDatum AND c.auftragsNr = :auftragsNr AND c.bereich = :bereich")
-    Optional<Claim> findByKey(@Param("pakz") String pakz, 
-                               @Param("rechNr") String rechNr, 
-                               @Param("rechDatum") String rechDatum, 
-                               @Param("auftragsNr") String auftragsNr, 
-                               @Param("bereich") String bereich); // @rpg-trace: n1824
+    Optional<Claim> findByKey(@Param("pakz") String pakz, @Param("rechNr") String rechNr, @Param("rechDatum") String rechDatum, @Param("auftragsNr") String auftragsNr, @Param("bereich") String bereich); // @rpg-trace: n1824
     
     @Query("SELECT c FROM Claim c WHERE c.pakz = :pakz AND c.claimNr = :claimNr")
-    Optional<Claim> findByPakzAndClaimNr(@Param("pakz") String pakz, 
-                                          @Param("claimNr") String claimNr);
+    Optional<Claim> findByPakzAndClaimNr(@Param("pakz") String pakz, @Param("claimNr") String claimNr);
+    
+    @Query("SELECT c FROM Claim c WHERE c.pakz = :pakz AND c.rechNr = :rechNr AND c.rechDatum = :rechDatum AND c.auftragsNr = :auftragsNr")
+    Optional<Claim> findByInvoiceKey(@Param("pakz") String pakz, @Param("rechNr") String rechNr, @Param("rechDatum") String rechDatum, @Param("auftragsNr") String auftragsNr);
     
     @Query("SELECT c FROM Claim c WHERE c.pakz = :pakz ORDER BY c.claimNr ASC")
     List<Claim> findByPakzOrderByClaimNrAsc(@Param("pakz") String pakz);
@@ -41,10 +39,4 @@ public interface ClaimRepository extends JpaRepository<Claim, ClaimId> {
     
     @Query("SELECT c FROM Claim c WHERE c.pakz = :pakz ORDER BY c.claimNr DESC")
     List<Claim> findByPakzOrderByClaimNrDescAll(@Param("pakz") String pakz);
-    
-    @Query("SELECT c FROM Claim c WHERE c.pakz = :pakz AND c.rechNr = :rechNr AND c.rechDatum = :rechDatum AND c.auftragsNr = :auftragsNr")
-    Optional<Claim> findByInvoiceKey(@Param("pakz") String pakz, 
-                                      @Param("rechNr") String rechNr, 
-                                      @Param("rechDatum") String rechDatum, 
-                                      @Param("auftragsNr") String auftragsNr);
 }
