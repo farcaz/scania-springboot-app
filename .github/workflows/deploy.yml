@@ -2,7 +2,7 @@ name: Deploy Warranty System to EC2
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "migration/HS1210_20260313_145001" ]
 
 jobs:
   build-and-push:
